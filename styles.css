@@ -191,7 +191,7 @@ section {
   bottom: -1px;
 }
 
-/* Goals Section - PC view: image and text side by side (50% each) */
+/* Goals Section – PC: exact half‑width side by side */
 .section-title {
   text-align: center;
   font-size: 2.5rem;
@@ -218,7 +218,7 @@ section {
 }
 
 .goal-img {
-  flex: 1; /* 50% width within flex container */
+  flex: 1; /* 50% of parent width */
   min-height: 320px;
   border-radius: 1.5rem;
   overflow: hidden;
@@ -238,7 +238,7 @@ section {
 }
 
 .goal-content {
-  flex: 1; /* 50% width */
+  flex: 1; /* 50% of parent width */
   padding: 1.8rem;
 }
 
@@ -392,7 +392,7 @@ section {
   font-size: 0.9rem;
 }
 
-/* fade-up animation */
+/* fade‑up animation */
 .fade-up {
   opacity: 0;
   transform: translateY(35px);
@@ -404,7 +404,39 @@ section {
   transform: translateY(0);
 }
 
-/* Responsive Design */
+/* Responsive: mobile menu slides from RIGHT (same side as hamburger) */
+@media (max-width: 768px) {
+  .nav-links {
+    position: fixed;
+    top: 70px;
+    right: -100%;          /* start off the right side */
+    left: auto;
+    flex-direction: column;
+    background: white;
+    width: 75%;
+    height: calc(100vh - 70px);
+    padding: 2rem;
+    box-shadow: -5px 0 20px rgba(0,0,0,0.08);
+    transition: 0.3s;
+    gap: 2rem;
+    align-items: flex-start;
+    z-index: 999;
+  }
+  .nav-links.active {
+    right: 0;              /* slide in from right */
+  }
+  .hamburger {
+    display: block;
+  }
+  .btn-primary, .btn-secondary {
+    padding: 0.7rem 1.5rem;
+  }
+  .hero-content h1 {
+    font-size: 2rem;
+  }
+}
+
+/* Tablet and below: goals become stacked */
 @media (max-width: 992px) {
   .goal-card, .goal-card.reverse {
     flex-direction: column !important;
@@ -413,43 +445,10 @@ section {
     width: 100%;
     min-height: 280px;
   }
-  .hero-content h1 {
-    font-size: 2.5rem;
-  }
   .section-title {
     font-size: 2rem;
   }
-}
-
-@media (max-width: 768px) {
-  .nav-links {
-    position: fixed;
-    top: 70px;
-    left: -100%;
-    flex-direction: column;
-    background: white;
-    width: 75%;
-    height: calc(100vh - 70px);
-    padding: 2rem;
-    box-shadow: 5px 0 20px rgba(0,0,0,0.08);
-    transition: 0.3s;
-    gap: 2rem;
-    align-items: flex-start;
-    z-index: 999;
-  }
-  .nav-links.active {
-    left: 0;
-  }
-  .hamburger {
-    display: block;
-  }
-  .btn-primary, .btn-secondary {
-    padding: 0.7rem 1.5rem;
-  }
-  .goal-content h3 {
-    font-size: 1.5rem;
-  }
   .hero-content h1 {
-    font-size: 2rem;
+    font-size: 2.5rem;
   }
 }
