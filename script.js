@@ -1,4 +1,4 @@
-// Mobile hamburger menu toggle
+// Mobile hamburger menu – slides from the same side (right side)
 const hamburger = document.getElementById('hamburgerIcon');
 const navLinks = document.getElementById('navLinks');
 
@@ -17,7 +17,7 @@ document.querySelectorAll('.nav-links a').forEach(link => {
   });
 });
 
-// Scroll-triggered fade-up animations using Intersection Observer
+// Scroll‑triggered fade‑up animations using Intersection Observer
 const fadeElements = document.querySelectorAll('.fade-up');
 
 const observer = new IntersectionObserver((entries) => {
@@ -31,7 +31,7 @@ const observer = new IntersectionObserver((entries) => {
 
 fadeElements.forEach(el => observer.observe(el));
 
-// Also check elements already in view on page load (redundant but safe)
+// Also check elements already in view on page load (safe double‑check)
 window.addEventListener('load', () => {
   fadeElements.forEach(el => {
     const rect = el.getBoundingClientRect();
@@ -40,8 +40,8 @@ window.addEventListener('load', () => {
       observer.unobserve(el);
     }
   });
-  
-  // Apply random animation delays to floating icons
+
+  // Apply random animation delays to floating icons for variety
   const floats = document.querySelectorAll('.floating-bg i');
   floats.forEach((icon, idx) => {
     const duration = 8 + (idx % 5);
@@ -51,7 +51,7 @@ window.addEventListener('load', () => {
   });
 });
 
-// Smooth anchor scrolling for internal links
+// Smooth anchor scrolling for internal navigation
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   anchor.addEventListener('click', function(e) {
     const targetId = this.getAttribute('href');
@@ -64,7 +64,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   });
 });
 
-// Demo button interactions (non-intrusive)
+// Demo button interactions (non‑intrusive, nonprofit demo)
 const donateBtn = document.getElementById('donateBtn');
 if (donateBtn) {
   donateBtn.addEventListener('click', (e) => {
