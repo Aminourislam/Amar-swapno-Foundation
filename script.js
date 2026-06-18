@@ -1,4 +1,96 @@
-// Mobile hamburger menu – slides from the same side (right side)
+// ============================================================
+// PRELOADER – CORRECTED IIFE
+// ============================================================
+(function() {
+  'use strict';
+
+  const video = document.getElementById('intro-video');
+  const preloader = document.getElementById('preloader');
+
+  // Helper: remove preloader and enable scroll
+  function dismissPreloader() {
+    if (!preloader) return;
+    preloader.classList.add('preloader-hidden');
+    document.body.style.overflow = 'auto';
+    document.documentElement.style.overflow = 'auto';
+    setTimeout(() => {
+      if (preloader.parentNode) {
+        preloader.remove();
+        document.body.classList.add('preloader-done');
+      }
+    }, 700);
+  }
+
+  // Helper: force-dismiss (error / fallback)
+  function forceDismiss() {
+    if (!preloader) return;
+    preloader.remove();
+    document.body.style.overflow = 'auto';
+    document.documentElement.style.overflow = 'auto';
+    document.body.classList.add('preloader-done');
+  }
+
+  // Check if user already watched this session
+  if (sessionStorage.getItem('introWatched') === 'true') {
+    forceDismiss();
+    return;
+  }
+
+  // If video already ended before we attached listener
+  if (video.ended) {
+    sessionStorage.setItem('introWatched', 'true');
+    dismissPreloader();
+    return;
+  }
+
+  // Normal flow: wait for video to end
+  let endedFired = false;
+
+  function onVideoEnded() {
+    if (endedFired) return;
+    endedFired = true;
+    sessionStorage.setItem('introWatched', 'true');
+    dismissPreloader();
+  }
+
+  video.addEventListener('ended', onVideoEnded);
+
+  // Error handling
+  video.addEventListener('error', function() {
+    forceDismiss();
+  });
+
+  // Safety timeout: dismiss after 30 seconds if video never ends
+  const safetyTimer = setTimeout(function() {
+    if (!endedFired && preloader && preloader.parentNode) {
+      sessionStorage.setItem('introWatched', 'true');
+      forceDismiss();
+    }
+  }, 30000);
+
+  // Cleanup timer if we dismiss early
+  const origDismiss = dismissPreloader;
+  dismissPreloader = function() {
+    clearTimeout(safetyTimer);
+    origDismiss.call(this);
+  };
+
+  const origForce = forceDismiss;
+  forceDismiss = function() {
+    clearTimeout(safetyTimer);
+    origForce.call(this);
+  };
+
+  // Expose a helper for other scripts to know when preloader is done
+  window.__preloaderDone = function() {
+    return document.body.classList.contains('preloader-done');
+  };
+
+})();
+
+// ============================================================
+// HAMBURGER MENU (slides from right)
+// ============================================================
 const hamburger = document.getElementById('hamburgerIcon');
 const navLinks = document.getElementById('navLinks');
 
@@ -8,7 +100,6 @@ if (hamburger) {
   });
 }
 
-// Close mobile menu when a nav link is clicked
 document.querySelectorAll('.nav-links a').forEach(link => {
   link.addEventListener('click', () => {
     if (navLinks.classList.contains('active')) {
@@ -17,9 +108,10 @@ document.querySelectorAll('.nav-links a').forEach(link => {
   });
 });
 
-// Scroll‑triggered fade‑up animations using Intersection Observer
+// ============================================================
+// SCROLL‑TRIGGERED FADE‑UP ANIMATIONS
+// ============================================================
 const fadeElements = document.querySelectorAll('.fade-up');
-
 const observer = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
     if (entry.isIntersecting) {
@@ -31,7 +123,7 @@ const observer = new IntersectionObserver((entries) => {
 
 fadeElements.forEach(el => observer.observe(el));
 
-// Also check elements already in view on page load (safe double‑check)
+// Also check elements already in view on load
 window.addEventListener('load', () => {
   fadeElements.forEach(el => {
     const rect = el.getBoundingClientRect();
@@ -41,7 +133,7 @@ window.addEventListener('load', () => {
     }
   });
 
-  // Apply random animation delays to floating icons for variety
+  // Random floating icon animations
   const floats = document.querySelectorAll('.floating-bg i');
   floats.forEach((icon, idx) => {
     const duration = 8 + (idx % 5);
@@ -51,7 +143,9 @@ window.addEventListener('load', () => {
   });
 });
 
-// Smooth anchor scrolling for internal navigation
+// ============================================================
+// SMOOTH ANCHOR SCROLLING
+// ============================================================
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   anchor.addEventListener('click', function(e) {
     const targetId = this.getAttribute('href');
@@ -64,7 +158,9 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   });
 });
 
-// Demo button interactions (non‑intrusive, nonprofit demo)
+// ============================================================
+// BUTTON INTERACTIONS (demo)
+// ============================================================
 const donateBtn = document.getElementById('donateBtn');
 if (donateBtn) {
   donateBtn.addEventListener('click', (e) => {

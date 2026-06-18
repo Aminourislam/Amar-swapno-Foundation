@@ -1,18 +1,66 @@
-﻿* {
+﻿/* ============================================================
+   1. RESET & BASE
+   ============================================================ */
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
+html,
 body {
-  font-family: 'Inter', sans-serif;
+  width: 100%;
+  min-height: 100vh;
   background: #ffffff;
+  font-family: 'Inter', sans-serif;
   color: #1e2f1e;
   line-height: 1.5;
   scroll-behavior: smooth;
-  overflow-x: hidden;
+  overflow: hidden; /* 👈 Prevents scroll while preloader is active */
+  touch-action: none; /* 👈 Blocks touch gestures on mobile */
 }
 
+body.preloader-done {
+  overflow: auto !important;
+  touch-action: auto !important;
+}
+
+/* ============================================================
+   2. PRELOADER OVERLAY (full‑screen, no interaction)
+   ============================================================ */
+#preloader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: #000000;
+  z-index: 99999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: opacity 0.6s ease-out;
+  touch-action: none; /* extra guard */
+}
+
+#preloader.preloader-hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+#preloader video {
+  width: 100%;
+  height: 100%;
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  display: block;
+  background: #000; /* fallback */
+}
+
+/* ============================================================
+   3. VARIABLES & GLOBAL
+   ============================================================ */
 :root {
   --dark-green: #1e4a2f;
   --primary-green: #2c6e3f;
@@ -38,7 +86,9 @@ section {
   position: relative;
 }
 
-/* Navigation */
+/* ============================================================
+   4. NAVIGATION
+   ============================================================ */
 .navbar {
   position: sticky;
   top: 0;
@@ -93,7 +143,9 @@ section {
   color: var(--dark-green);
 }
 
-/* Hero Section */
+/* ============================================================
+   5. HERO SECTION
+   ============================================================ */
 .hero {
   position: relative;
   background: linear-gradient(125deg, #f0f9ec 0%, #d9e8d6 45%, #cfe6cf 100%);
@@ -151,7 +203,8 @@ section {
   flex-wrap: wrap;
 }
 
-.btn-primary, .btn-secondary {
+.btn-primary,
+.btn-secondary {
   display: inline-block;
   padding: 0.9rem 2rem;
   border-radius: 50px;
@@ -163,7 +216,7 @@ section {
 .btn-primary {
   background: var(--primary-green);
   color: white;
-  box-shadow: 0 4px 12px rgba(44,110,63,0.3);
+  box-shadow: 0 4px 12px rgba(44, 110, 63, 0.3);
 }
 
 .btn-primary:hover {
@@ -182,7 +235,6 @@ section {
   transform: translateY(-3px);
 }
 
-/* Wave divider */
 .wave-divider svg {
   display: block;
   width: 100%;
@@ -191,7 +243,9 @@ section {
   bottom: -1px;
 }
 
-/* Goals Section – PC: exact half‑width side by side */
+/* ============================================================
+   6. GOALS SECTION (half‑half alternating)
+   ============================================================ */
 .section-title {
   text-align: center;
   font-size: 2.5rem;
@@ -218,7 +272,7 @@ section {
 }
 
 .goal-img {
-  flex: 1; /* 50% of parent width */
+  flex: 1;
   min-height: 320px;
   border-radius: 1.5rem;
   overflow: hidden;
@@ -238,7 +292,7 @@ section {
 }
 
 .goal-content {
-  flex: 1; /* 50% of parent width */
+  flex: 1;
   padding: 1.8rem;
 }
 
@@ -260,12 +314,13 @@ section {
   line-height: 1.6;
 }
 
-/* Alternate layout: image on right, text on left */
 .goal-card.reverse {
   flex-direction: row-reverse;
 }
 
-/* Impact Section */
+/* ============================================================
+   7. IMPACT SECTION
+   ============================================================ */
 .impact-section {
   background: linear-gradient(120deg, #f9fef7, #f0f7ec);
 }
@@ -301,7 +356,9 @@ section {
   color: #2b4b2b;
 }
 
-/* Projects Preview */
+/* ============================================================
+   8. PROJECTS PREVIEW
+   ============================================================ */
 .projects-section {
   background: #ffffff;
   padding: 60px 0;
@@ -340,7 +397,9 @@ section {
   box-shadow: var(--shadow-md);
 }
 
-/* Contact Section */
+/* ============================================================
+   9. CONTACT & FOOTER
+   ============================================================ */
 .contact-section {
   background: var(--light-green);
   padding: 60px 0;
@@ -366,7 +425,6 @@ section {
   color: var(--gold-accent);
 }
 
-/* Footer */
 .footer {
   background: #1c2f1c;
   color: #e1f0e1;
@@ -392,7 +450,9 @@ section {
   font-size: 0.9rem;
 }
 
-/* fade‑up animation */
+/* ============================================================
+   10. SCROLL ANIMATIONS (fade‑up)
+   ============================================================ */
 .fade-up {
   opacity: 0;
   transform: translateY(35px);
@@ -404,55 +464,111 @@ section {
   transform: translateY(0);
 }
 
-/* Responsive: mobile menu slides from RIGHT (same side as hamburger) */
+/* ============================================================
+   11. RESPONSIVE BREAKPOINTS
+   ============================================================ */
+
+/* --- Tablets & small laptops (≤ 992px) --- */
+@media (max-width: 992px) {
+  .goal-card,
+  .goal-card.reverse {
+    flex-direction: column !important;
+  }
+
+  .goal-img {
+    width: 100%;
+    min-height: 280px;
+  }
+
+  .section-title {
+    font-size: 2rem;
+  }
+
+  .hero-content h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* --- Mobile (≤ 768px) --- */
 @media (max-width: 768px) {
+  /* Navigation: hamburger menu slides from right */
   .nav-links {
     position: fixed;
     top: 70px;
-    right: -100%;          /* start off the right side */
+    right: -100%;
     left: auto;
     flex-direction: column;
     background: white;
     width: 75%;
     height: calc(100vh - 70px);
     padding: 2rem;
-    box-shadow: -5px 0 20px rgba(0,0,0,0.08);
+    box-shadow: -5px 0 20px rgba(0, 0, 0, 0.08);
     transition: 0.3s;
     gap: 2rem;
     align-items: flex-start;
     z-index: 999;
   }
+
   .nav-links.active {
-    right: 0;              /* slide in from right */
+    right: 0;
   }
+
   .hamburger {
     display: block;
   }
-  .btn-primary, .btn-secondary {
+
+  .btn-primary,
+  .btn-secondary {
     padding: 0.7rem 1.5rem;
   }
+
   .hero-content h1 {
     font-size: 2rem;
   }
-}
 
-/* Tablet and below: goals become stacked */
-@media (max-width: 992px) {
-  .goal-card, .goal-card.reverse {
-    flex-direction: column !important;
+  .hero-content p {
+    font-size: 1rem;
   }
-  .goal-img {
-    width: 100%;
-    min-height: 280px;
-  }
+
   .section-title {
-    font-size: 2rem;
+    font-size: 1.8rem;
   }
-  .hero-content h1 {
-    font-size: 2.5rem;
+
+  .goal-content h3 {
+    font-size: 1.5rem;
+  }
+
+  .impact-card {
+    padding: 2rem 1.5rem;
+  }
+
+  .impact-card h2 {
+    font-size: 1.6rem;
+  }
+
+  .project-card {
+    flex: 1 1 100%;
   }
 }
 
+/* --- Small phones (≤ 480px) --- */
+@media (max-width: 480px) {
+  .hero-content h1 {
+    font-size: 1.6rem;
+  }
 
+  .btn-group {
+    flex-direction: column;
+    align-items: center;
+  }
 
+  .btn-primary,
+  .btn-secondary {
+    width: 100%;
+    text-align: center;
+  }
 
+  .goal-img {
+    min-height: 200px;
+  }
+}
