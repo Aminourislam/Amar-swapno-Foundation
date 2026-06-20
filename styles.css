@@ -126,14 +126,21 @@ section {
 
 .nav-links a {
   text-decoration: none;
-  font-weight: 500;
+  font-weight: 600;
   color: #2c3a2c;
   transition: color 0.2s;
+  cursor: pointer;
+  padding: 3px;
   font-size: 1rem;
 }
 
 .nav-links a:hover {
-  color: var(--primary-green);
+  color: var(--white);
+  padding: 5px;
+  background-color: var(--primary-green);
+  border-radius: 3px;
+  transition: background-color 0.2s ease;
+  transition: color 0.2s ease;
 }
 
 .hamburger {
