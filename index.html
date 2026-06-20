@@ -45,13 +45,19 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-      <div id="preloader">
-        <video id="intro-video" autoplay muted playsinline>
-            <source src="intro.mp4" type="video/mp4">
-            Your browser does not support the video tag.
-        </video>
-    </div>
+  <!-- ============================================================
+       PRELOADER
+  ============================================================ -->
+  <div id="preloader">
+    <video id="intro-video" autoplay muted playsinline>
+      <source src="intro.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+  </div>
 
+  <!-- ============================================================
+       NAVIGATION
+  ============================================================ -->
   <nav class="navbar" id="navbar">
     <div class="nav-container">
       <div class="logo"><h1>Amar Shopno Foundation</h1></div>
@@ -66,7 +72,9 @@
     </div>
   </nav>
 
-  <!-- Hero Section -->
+  <!-- ============================================================
+       HERO SECTION  (wave at the BOTTOM)
+  ============================================================ -->
   <section class="hero" id="home">
     <div class="floating-bg">
       <i class="fas fa-tree"></i>
@@ -85,39 +93,51 @@
         </div>
       </div>
     </div>
-    <div class="wave-divider">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 100" preserveAspectRatio="none">
-        <path fill="#ffffff" d="M0,64L80,74.7C160,85,320,107,480,106.7C640,107,800,85,960,80C1120,75,1280,85,1360,90.7L1440,96L1440,100L1360,100C1280,100,1120,100,960,100C800,100,640,100,480,100C320,100,160,100,80,100L0,100Z"></path>
+
+    <!-- ★★★  WAVE – BOTTOM of HERO  ★★★ -->
+    <div class="wave-divider wave-bottom">
+      <svg xmlns="http://www.w3.org/2000/svg"
+           viewBox="0 0 1440 120"
+           preserveAspectRatio="none">
+        <path fill="#ffffff"
+              d="M0,40
+                 C320,120  480,120  720,80
+                 C960,40   1120,120  1440,80
+                 L1440,120
+                 L0,120
+                 Z" />
       </svg>
     </div>
   </section>
 
-  <!-- Our Goals Section (alternating half-half layout) -->
+  <!-- ============================================================
+       GOALS SECTION
+  ============================================================ -->
   <section class="goals-section" id="goals">
     <div class="container">
       <h2 class="section-title fade-up">Our Focus Areas</h2>
       <div class="goals-list">
-        <!-- Goal 1: Left image, right text -->
+        <!-- Goal 1 -->
         <div class="goal-card fade-up">
           <div class="goal-img"><img src="https://picsum.photos/id/15/900/600" alt="Community housing support" loading="lazy"></div>
           <div class="goal-content"><i class="fas fa-home"></i><h3>Home & Community</h3><p>Supporting families and strengthening communities through sustainable development programs.</p></div>
         </div>
-        <!-- Goal 2: Left text, right image (reverse) -->
+        <!-- Goal 2 -->
         <div class="goal-card reverse fade-up">
           <div class="goal-img"><img src="https://picsum.photos/id/20/900/600" alt="Education & learning" loading="lazy"></div>
           <div class="goal-content"><i class="fas fa-graduation-cap"></i><h3>Education & Learning</h3><p>Providing educational opportunities and resources for children and young adults.</p></div>
         </div>
-        <!-- Goal 3: Left image, right text -->
+        <!-- Goal 3 -->
         <div class="goal-card fade-up">
           <div class="goal-img"><img src="https://picsum.photos/id/116/900/600" alt="Health & wellbeing" loading="lazy"></div>
           <div class="goal-content"><i class="fas fa-heartbeat"></i><h3>Health & Wellbeing</h3><p>Promoting healthy living and access to essential healthcare services.</p></div>
         </div>
-        <!-- Goal 4: Left text, right image -->
+        <!-- Goal 4 -->
         <div class="goal-card reverse fade-up">
           <div class="goal-img"><img src="https://picsum.photos/id/26/900/600" alt="Youth empowerment" loading="lazy"></div>
           <div class="goal-content"><i class="fas fa-users"></i><h3>Youth Empowerment</h3><p>Helping young people develop skills, confidence, and leadership abilities.</p></div>
         </div>
-        <!-- Goal 5: Left image, right text -->
+        <!-- Goal 5 -->
         <div class="goal-card fade-up">
           <div class="goal-img"><img src="https://picsum.photos/id/96/900/600" alt="Environmental awareness" loading="lazy"></div>
           <div class="goal-content"><i class="fas fa-leaf"></i><h3>Environmental Awareness</h3><p>Creating sustainable and eco-friendly initiatives for future generations.</p></div>
@@ -126,7 +146,9 @@
     </div>
   </section>
 
-  <!-- Impact Summary Section -->
+  <!-- ============================================================
+       IMPACT SECTION
+  ============================================================ -->
   <section class="impact-section" id="about">
     <div class="container">
       <div class="impact-card fade-up">
@@ -137,7 +159,9 @@
     </div>
   </section>
 
-  <!-- Projects Preview -->
+  <!-- ============================================================
+       PROJECTS SECTION
+  ============================================================ -->
   <section id="projects" class="projects-section">
     <div class="container">
       <h2 class="section-title fade-up">Ongoing Projects</h2>
@@ -149,8 +173,25 @@
     </div>
   </section>
 
-  <!-- Contact Section -->
+  <!-- ============================================================
+       CONTACT SECTION  (wave at the TOP)
+  ============================================================ -->
   <section id="contact" class="contact-section">
+    <!-- ★★★  WAVE – TOP of CONTACT (flipped)  ★★★ -->
+    <div class="wave-divider wave-top">
+      <svg xmlns="http://www.w3.org/2000/svg"
+           viewBox="0 0 1440 120"
+           preserveAspectRatio="none">
+        <path fill="#ffffff"
+              d="M0,40
+                 C320,120  480,120  720,80
+                 C960,40   1120,120  1440,80
+                 L1440,120
+                 L0,120
+                 Z" />
+      </svg>
+    </div>
+
     <div class="container contact-container">
       <h2 class="section-title fade-up">Get in Touch</h2>
       <div class="contact-info fade-up">
@@ -162,6 +203,9 @@
     </div>
   </section>
 
+  <!-- ============================================================
+       FOOTER
+  ============================================================ -->
   <footer class="footer">
     <div class="socials">
       <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
@@ -169,7 +213,7 @@
       <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
       <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
     </div>
-    <p>&copy; 2026 Amar Shopno Foundation — Empowering dreams, transforming lives.</p>
+    <p>&copy; <span id="year"></span> Amar Shopno Foundation — Empowering dreams, transforming lives.</p>
   </footer>
 
   <script src="script.js"></script>

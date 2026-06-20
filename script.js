@@ -176,3 +176,10 @@ if (volunteerBtn) {
     alert('Join our volunteer family! We will reach out soon.');
   });
 }
+// ============================================================
+// Footer year variable
+// ============================================================
+document.addEventListener('DOMContentLoaded', () => {
+  const el = document.getElementById('year');
+  if (el) el.textContent = new Date().getFullYear();
+});

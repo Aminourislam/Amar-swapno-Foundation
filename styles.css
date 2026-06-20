@@ -16,8 +16,8 @@ body {
   color: #1e2f1e;
   line-height: 1.5;
   scroll-behavior: smooth;
-  overflow: hidden; /* 👈 Prevents scroll while preloader is active */
-  touch-action: none; /* 👈 Blocks touch gestures on mobile */
+  overflow: hidden; /* prevents scroll while preloader is active */
+  touch-action: none;
 }
 
 body.preloader-done {
@@ -26,7 +26,7 @@ body.preloader-done {
 }
 
 /* ============================================================
-   2. PRELOADER OVERLAY (full‑screen, no interaction)
+   2. PRELOADER
    ============================================================ */
 #preloader {
   position: fixed;
@@ -40,7 +40,7 @@ body.preloader-done {
   justify-content: center;
   align-items: center;
   transition: opacity 0.6s ease-out;
-  touch-action: none; /* extra guard */
+  touch-action: none;
 }
 
 #preloader.preloader-hidden {
@@ -55,7 +55,7 @@ body.preloader-done {
   max-height: 100%;
   object-fit: contain;
   display: block;
-  background: #000; /* fallback */
+  background: #000;
 }
 
 /* ============================================================
@@ -235,16 +235,37 @@ section {
   transform: translateY(-3px);
 }
 
+/* ============================================================
+   6. WAVE DIVIDERS (clean absolute positioning)
+   ============================================================ */
+.wave-divider {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  line-height: 0;
+  pointer-events: none;  /* so clicks pass through to the section */
+}
+
 .wave-divider svg {
   display: block;
   width: 100%;
   height: auto;
-  position: relative;
-  bottom: -1px;
+  vertical-align: bottom;
+}
+
+/* --- Bottom wave (hero) --- */
+.wave-divider.wave-bottom {
+  bottom: 0;
+}
+
+/* --- Top wave (contact) --- */
+.wave-divider.wave-top {
+  top: 0;
+  transform: scaleY(-1);  /* flips the wave upside down */
 }
 
 /* ============================================================
-   6. GOALS SECTION (half‑half alternating)
+   7. GOALS SECTION
    ============================================================ */
 .section-title {
   text-align: center;
@@ -319,7 +340,7 @@ section {
 }
 
 /* ============================================================
-   7. IMPACT SECTION
+   8. IMPACT SECTION
    ============================================================ */
 .impact-section {
   background: linear-gradient(120deg, #f9fef7, #f0f7ec);
@@ -357,7 +378,7 @@ section {
 }
 
 /* ============================================================
-   8. PROJECTS PREVIEW
+   9. PROJECTS PREVIEW
    ============================================================ */
 .projects-section {
   background: #ffffff;
@@ -398,11 +419,13 @@ section {
 }
 
 /* ============================================================
-   9. CONTACT & FOOTER
+   10. CONTACT SECTION
    ============================================================ */
 .contact-section {
+  position: relative;
   background: var(--light-green);
-  padding: 60px 0;
+  padding: 80px 0 60px;  /* extra top padding to accommodate the wave */
+  overflow: hidden;
 }
 
 .contact-container {
@@ -425,6 +448,9 @@ section {
   color: var(--gold-accent);
 }
 
+/* ============================================================
+   11. FOOTER
+   ============================================================ */
 .footer {
   background: #1c2f1c;
   color: #e1f0e1;
@@ -451,7 +477,7 @@ section {
 }
 
 /* ============================================================
-   10. SCROLL ANIMATIONS (fade‑up)
+   12. SCROLL ANIMATIONS
    ============================================================ */
 .fade-up {
   opacity: 0;
@@ -465,10 +491,10 @@ section {
 }
 
 /* ============================================================
-   11. RESPONSIVE BREAKPOINTS
+   13. RESPONSIVE BREAKPOINTS
    ============================================================ */
 
-/* --- Tablets & small laptops (≤ 992px) --- */
+/* Tablets & small laptops */
 @media (max-width: 992px) {
   .goal-card,
   .goal-card.reverse {
@@ -489,9 +515,8 @@ section {
   }
 }
 
-/* --- Mobile (≤ 768px) --- */
+/* Mobile */
 @media (max-width: 768px) {
-  /* Navigation: hamburger menu slides from right */
   .nav-links {
     position: fixed;
     top: 70px;
@@ -549,9 +574,14 @@ section {
   .project-card {
     flex: 1 1 100%;
   }
+
+  /* Wave adjustments for small screens */
+  .wave-divider svg {
+    height: 40px; /* smaller wave on mobile */
+  }
 }
 
-/* --- Small phones (≤ 480px) --- */
+/* Small phones */
 @media (max-width: 480px) {
   .hero-content h1 {
     font-size: 1.6rem;
@@ -570,5 +600,9 @@ section {
 
   .goal-img {
     min-height: 200px;
+  }
+
+  .wave-divider svg {
+    height: 30px;
   }
 }
