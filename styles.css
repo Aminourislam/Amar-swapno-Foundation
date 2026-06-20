@@ -130,13 +130,13 @@ section {
   color: #2c3a2c;
   transition: color 0.2s;
   cursor: pointer;
-  padding: 3px;
+  padding: 4px;
   font-size: 1rem;
 }
 
 .nav-links a:hover {
   color: var(--white);
-  padding: 5px;
+  padding: 4px;
   background-color: var(--primary-green);
   border-radius: 3px;
   transition: background-color 0.2s ease;
@@ -539,6 +539,12 @@ section {
     gap: 2rem;
     align-items: flex-start;
     z-index: 999;
+  }
+
+    .nav-links a {
+    display: block;
+    width: 100%;
+    padding: 0.75rem 1rem;
   }
 
   .nav-links.active {
