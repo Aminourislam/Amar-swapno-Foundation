@@ -21,7 +21,8 @@ body {
 }
 
 body.preloader-done {
-  overflow: auto !important;
+  overflow-y: auto !important;   /* allow vertical scroll */
+  overflow-x: hidden !important; /* block horizontal scroll */
   touch-action: auto !important;
 }
 
@@ -128,19 +129,16 @@ section {
   text-decoration: none;
   font-weight: 600;
   color: #2c3a2c;
-  transition: color 0.2s;
+  transition: all 0.2s ease;
   cursor: pointer;
-  padding: 4px;
+  padding: 4px 8px;
   font-size: 1rem;
+  border-radius: 3px;
 }
 
 .nav-links a:hover {
-  color: var(--white);
-  padding: 4px;
   background-color: var(--primary-green);
-  border-radius: 3px;
-  transition: background-color 0.2s ease;
-  transition: color 0.2s ease;
+  color: var(--white);
 }
 
 .hamburger {
@@ -243,14 +241,14 @@ section {
 }
 
 /* ============================================================
-   6. WAVE DIVIDERS (clean absolute positioning)
+   6. WAVE DIVIDERS
    ============================================================ */
 .wave-divider {
   position: absolute;
   left: 0;
   width: 100%;
   line-height: 0;
-  pointer-events: none;  /* so clicks pass through to the section */
+  pointer-events: none;
 }
 
 .wave-divider svg {
@@ -260,15 +258,13 @@ section {
   vertical-align: bottom;
 }
 
-/* --- Bottom wave (hero) --- */
 .wave-divider.wave-bottom {
   bottom: 0;
 }
 
-/* --- Top wave (contact) --- */
 .wave-divider.wave-top {
   top: 0;
-  transform: scaleY(-1);  /* flips the wave upside down */
+  transform: scaleY(-1);
 }
 
 /* ============================================================
@@ -431,7 +427,7 @@ section {
 .contact-section {
   position: relative;
   background: var(--light-green);
-  padding: 80px 0 60px;  /* extra top padding to accommodate the wave */
+  padding: 80px 0 60px;
   overflow: hidden;
 }
 
@@ -524,6 +520,10 @@ section {
 
 /* Mobile */
 @media (max-width: 768px) {
+  body {
+    overscroll-behavior-x: none;
+  }
+
   .nav-links {
     position: fixed;
     top: 70px;
@@ -536,15 +536,19 @@ section {
     padding: 2rem;
     box-shadow: -5px 0 20px rgba(0, 0, 0, 0.08);
     transition: 0.3s;
-    gap: 2rem;
-    align-items: flex-start;
+    gap: 0.5rem; /* reduced gap */
+    align-items: stretch; /* ★ FIX: allows links to fill width */
     z-index: 999;
+    overflow-y: auto; /* allow scroll within nav if needed */
   }
 
-    .nav-links a {
+  .nav-links a {
     display: block;
     width: 100%;
     padding: 0.75rem 1rem;
+    box-sizing: border-box;
+    text-align: left; /* keep text left-aligned */
+    font-weight: 600;
   }
 
   .nav-links.active {
@@ -588,9 +592,8 @@ section {
     flex: 1 1 100%;
   }
 
-  /* Wave adjustments for small screens */
   .wave-divider svg {
-    height: 40px; /* smaller wave on mobile */
+    height: 40px;
   }
 }
 
